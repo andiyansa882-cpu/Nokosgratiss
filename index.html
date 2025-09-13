@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PERINGATAN! Sistem Terkunci</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+        
+        body {
+            background-color: #000;
+            color: #ff0000;
+            height: 100vh;
+            overflow: hidden;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            border: 2px solid #ff0000;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.9);
+            box-shadow: 0 0 20px #ff0000;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        .warning-icon {
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+        
+        h1 {
+            font-size: 28px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        
+        .message {
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .countdown {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #1a0000;
+            border: 1px solid #ff0000;
+        }
+        
+        .payment-details {
+            background-color: #1a0000;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ff0000;
+        }
+        
+        .button-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        button {
+            background-color: #ff0000;
+            color: #000;
+            border: none;
+            padding: 10px 25px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 0 10px;
+            transition: all 0.3s;
+        }
+        
+        button:hover {
+            background-color: #ff5555;
+            transform: scale(1.05);
+        }
+        
+        .disclaimer {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 10px;
+            color: #444;
+            display: none;
+        }
+        
+        .scan-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color: #ff0000;
+            box-shadow: 0 0 10px #ff0000;
+            animation: scan 3s linear infinite;
+        }
+        
+        @keyframes scan {
+            0% { top: 0; }
+            50% { top: 100%; }
+            100% { top: 0; }
+        }
+        
+        .file-list {
+            margin-top: 20px;
+            max-height: 150px;
+            overflow-y: auto;
+            background-color: #1a0000;
+            padding: 10px;
+            border: 1px solid #ff0000;
+        }
+        
+        .file-item {
+            padding: 5px;
+            border-bottom: 1px dashed #ff0000;
+        }
+        
+        /* Efek terminal/command prompt */
+        .terminal {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30px;
+            background-color: #002200;
+            color: #00ff00;
+            padding: 5px;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="scan-animation"></div>
+    
+    <div class="container">
+        <div class="header">
+            <div class="warning-icon">⚠️</div>
+            <h1>PERINGATAN! SISTEM ANDA DIKENKRIPSI</h1>
+        </div>
+        
+        <div class="message">
+            <p>Semua file di perangkat Anda telah dienkripsi dengan algoritma RSA-2048 dan AES-128.</p>
+            <p>Data Anda termasuk dokumen, foto, database, dan file lainnya tidak dapat diakses.</p>
+            <p>Jika Anda ingin memulihkan data, Anda harus membayar tebusan sebesar <strong>Rp 5.000.000</strong> dalam Bitcoin.</p>
+        </div>
+        
+        <div class="countdown">
+            Waktu tersisa: <span id="timer">23:59:59</span>
+        </div>
+        
+        <div class="payment-details">
+            <p>➡️ Jumlah Tebusan: 0.15 BTC</p>
+            <p>➡️ Alamat Bitcoin: 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa</p>
+            <p>➡️ Setelah pembayaran, kirim bukti ke: decrypt-service@onionmail.com</p>
+        </div>
+        
+        <div class="file-list">
+            <div class="file-item">[TERENKRIPSI] document.pdf</div>
+            <div class="file-item">[TERENKRIPSI] foto_liburan.jpg</div>
+            <div class="file-item">[TERENKRIPSI] data_kerja.xlsx</div>
+            <div class="file-item">[TERENKRIPSI] tugas_kuliah.doc</div>
+            <div class="file-item">[TERENKRIPSI] database_backup.sql</div>
+            <div class="file-item">[TERENKRIPSI] video_keluarga.mp4</div>
+            <!-- File lainnya akan ditambahkan oleh JavaScript -->
+        </div>
+        
+        <div class="button-container">
+            <button id="payButton">BAYAR TEBUSAN</button>
+            <button id="decryptButton">DEKRIPSI FILE</button>
+        </div>
+    </div>
+    
+    <div class="terminal" id="terminal">
+        C:\Windows\system32> 
+    </div>
+    
+    <div class="disclaimer" id="disclaimer">
+        Website ini hanya untuk tujuan prank dan hiburan. Tidak ada data yang benar-benar dienkripsi.
+    </div>
+
+    <script>
+        // Timer countdown
+        function startTimer(duration, display) {
+            let timer = duration, hours, minutes, seconds;
+            setInterval(function () {
+                hours = parseInt(timer / 3600, 10);
+                minutes = parseInt((timer % 3600) / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+                
+                hours = hours < 10 ? "0" + hours : hours;
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+                
+                display.textContent = hours + ":" + minutes + ":" + seconds;
+                
+                if (--timer < 0) {
+                    timer = 0;
+                }
+            }, 1000);
+        }
+        
+        window.onload = function () {
+            const oneDay = 24 * 60 * 60;
+            const display = document.querySelector('#timer');
+            startTimer(oneDay, display);
+            
+            // Tambahkan efek terminal
+            const terminal = document.getElementById('terminal');
+            const commands = [
+                "scanning system...",
+                "encrypting files...",
+                "C:\\Windows\\system32>taskkill /f /im explorer.exe",
+                "C:\\Windows\\system32>bootrec /fixmbr",
+                "C:\\Windows\\system32>access denied",
+                "C:\\Windows\\system32>connection established",
+                "C:\\Windows\\system32>upload complete"
+            ];
+            
+            let commandIndex = 0;
+            setInterval(() => {
+                terminal.textContent = commands[commandIndex];
+                commandIndex = (commandIndex + 1) % commands.length;
+            }, 3000);
+            
+            // Tambahkan file acak ke daftar
+            const fileList = document.querySelector('.file-list');
+            const fileNames = [
+                "laporan_keuangan.xlsx", "skripsi.doc", "foto_pernikahan.jpg", 
+                "video_keluarga.mov", "password_backup.txt", "database.sql", 
+                "cv_kerja.pdf", "surat_lamaran.doc", "nota_beli.txt", 
+                "backup_chat.zip", "private_photo.png", "dokumen_pribadi.rar"
+            ];
+            
+            for (let i = 0; i < 15; i++) {
+                const randomFile = fileNames[Math.floor(Math.random() * fileNames.length)];
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item';
+                fileItem.textContent = '[TERENKRIPSI] ' + randomFile;
+                fileList.appendChild(fileItem);
+            }
+            
+            // Tombol bayar tebusan
+            document.getElementById('payButton').addEventListener('click', function() {
+                alert('Fitur pembayaran tidak aktif. Ini hanya simulasi prank!');
+            });
+            
+            // Tombol dekripsi
+            document.getElementById('decryptButton').addEventListener('click', function() {
+                const decrypt = confirm('Fitur dekripsi akan membuka kunci "sistem". Lanjutkan?');
+                if (decrypt) {
+                    alert('SISTEM DIPULIHKAN!\n\nIni hanya prank! Tidak ada data yang benar-benar terenkripsi.\n\nJangan khawatir, komputer Anda aman.');
+                    document.getElementById('disclaimer').style.display = 'block';
+                    setTimeout(function() {
+                        alert('Website ini dibuat hanya untuk tujuan hiburan dan edukasi.\nSelalu berhati-hati terhadap serangan ransomware yang nyata!');
+                    }, 1000);
+                }
+            });
+            
+            // Efek ketikan
+            const messages = document.querySelectorAll('.message p');
+            messages.forEach(msg => {
+                const originalText = msg.textContent;
+                msg.textContent = '';
+                let i = 0;
+                const typeWriter = setInterval(() => {
+                    if (i < originalText.length) {
+                        msg.textContent += originalText.charAt(i);
+                        i++;
+                    } else {
+                        clearInterval(typeWriter);
+                    }
+                }, 25);
+            });
+        };
+        
+        // Blokir klik kanan
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            alert('Akses ditolak! Sistem terkunci.');
+        });
+        
+        // Blokir pintasan keyboard
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && (e.key === 's' || e.key === 'S')) {
+                e.preventDefault();
+                alert('Perintah diblokir! Sistem terkunci.');
+            }
+            if (e.key === 'F12') {
+                e.preventDefault();
+                alert('Akses Developer Tools diblokir!');
+            }
+        });
+    </script>
+</body>
+</html>
